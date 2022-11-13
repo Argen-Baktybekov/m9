@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table
+@Table(name = "item")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

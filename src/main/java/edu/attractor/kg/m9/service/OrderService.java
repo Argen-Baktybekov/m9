@@ -36,7 +36,7 @@ public void printOrder(){
 
     LocalDateTime time = LocalDateTime.now();
 //    System.out.println(orderRepository.findAllByMyDate(time.getYear(), time.getMonthValue(), time.getDayOfMonth()));
-//    System.out.println(orderRepository.findOrderByItemName("Rose"));
+    System.out.println(orderRepository.findOrderByItemName("Rose"));
     orderRepository.findOrderByItemCategory("flowers");
     System.out.println(orderRepository.findOrderByCustomerPhone("0703039401"));
     System.out.println(orderRepository.findOrderByCustomer_FirstName("Argen"));

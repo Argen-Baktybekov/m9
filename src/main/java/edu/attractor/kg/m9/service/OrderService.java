@@ -6,12 +6,10 @@ import edu.attractor.kg.m9.entities.Order;
 import edu.attractor.kg.m9.repositories.CustomerRepository;
 import edu.attractor.kg.m9.repositories.ItemRepository;
 import edu.attractor.kg.m9.repositories.OrderRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public void printOrder(){
     System.out.println(orderRepository.findAll());
 
     LocalDateTime time = LocalDateTime.now();
-//    System.out.println(orderRepository.findAllByMyDate(time.getYear(), time.getMonthValue(), time.getDayOfMonth()));
+    System.out.println(orderRepository.findAllByMyDate(time.getYear(), time.getMonthValue(), time.getDayOfMonth()));
     System.out.println(orderRepository.findOrderByItemName("Rose"));
     orderRepository.findOrderByItemCategory("flowers");
     System.out.println(orderRepository.findOrderByCustomerPhone("0703039401"));

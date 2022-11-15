@@ -13,8 +13,16 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query(value = "select Order from Order where year(time)= :year and month(time) = :month and day(time) = :day")
-    List<Order> findAllByDate(int year, int month, int day);
+//    @Query(value = "select Order from Order o where year(o.time)= :year and month(o.time) = :month and day(o.time) = :day")
+//    List<Order> findAllByMyDate(int year, int month, int day);
+//
+//    @Query("select Order from Order join Item i where i.name = :name")
+//    List<Order>findOrderByItemName(String name);
 
+    @Query(nativeQuery = true, value = "select * from orders o inner join orders_items oi on o.id = oi.order_id inner join item i on i.id = oi.items_id where i.category = :category")
+    List<Order>findOrderByItemCategory(String category);
+//
+    Order findOrderByCustomerPhone(String phone);
+    Order findOrderByCustomer_FirstName(String firstName);
 
  }

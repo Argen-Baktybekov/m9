@@ -16,11 +16,11 @@ public class CustomerService {
         return save.getId();
     }
 
-    @Bean
+//    @Bean
     public void printCustomer(){
         System.out.println(customerRepository.findAll());
 
-        customerRepository.changeLastName("Baktybekof", 1L);
+        customerRepository.changeLastName("Baktybekov", 1L);
         customerRepository.changeName("qwerty", 1L);
         System.out.println(customerRepository.findCustomersByFirstNameAndLastNameContains("qwerty", "argen"));
         customerRepository.changePhone("996703039401", 1L);

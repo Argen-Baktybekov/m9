@@ -1,5 +1,6 @@
 package edu.attractor.kg.m9.service;
 
+import edu.attractor.kg.m9.entities.Category;
 import edu.attractor.kg.m9.entities.Customer;
 import edu.attractor.kg.m9.entities.Item;
 import edu.attractor.kg.m9.entities.Order;
@@ -20,16 +21,16 @@ public class OrderService {
     private final CustomerRepository customerRepository;
     private final ItemRepository itemRepository;
 
-public void addOrder(){
-    Customer customer = customerRepository.findById(1L).get();
-    List<Item> items = itemRepository.findAllByCategoryOrderById("flowers");
-    Order order = new Order(1l, customer, items, LocalDateTime.now(), 0);
-    orderRepository.save(order);
-}
+//public void addOrder(){
+//    Customer customer = customerRepository.findById(1L).get();
+//    List<Item> items = itemRepository.findAllByCategoryOrderById(Category.FLOWERS.toString());
+//    Order order = new Order(1l, customer, items, LocalDateTime.now(), 0.0);
+//    orderRepository.save(order);
+//}
 
-@Bean
+//@Bean
 public void printOrder(){
-    addOrder();
+//    addOrder();
     System.out.println(orderRepository.findAll());
 
     LocalDateTime time = LocalDateTime.now();

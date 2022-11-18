@@ -1,5 +1,6 @@
 package edu.attractor.kg.m9.service;
 
+import edu.attractor.kg.m9.entities.Category;
 import edu.attractor.kg.m9.entities.Item;
 import edu.attractor.kg.m9.repositories.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ public void changeDescription(){
         changeDescription();
         itemRepository.changePrice(9.0,1l);
         System.out.println(getItemPageSortedAscPrice().getContent());
-            System.out.println(itemRepository.findAllByCategoryOrderById("flowers"));
+            System.out.println(itemRepository.findAllByCategoryOrderById(Category.FLOWERS.toString()));
             System.out.println(itemRepository.findItemByNameIgnoreCaseOrDescriptionContains("rose", "rose"));
             System.out.println(itemRepository.getItemsByMaxPrice(10.0));
 

@@ -6,7 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,8 +18,12 @@ public class CustomerControllers {
     private final CustomerService customerService;
 
     @PostMapping("/newCustomer")
-    public ResponseEntity<?> addNewCustomer(@RequestBody Customer customer){
-       return new ResponseEntity<>(customerService.addNewCustomer(customer), HttpStatus.OK );
+    public String addNewCustomer(@Valid @RequestBody Customer customer, BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "newCustomer";
+
+        customerService.addNewCustomer(customer);
+       return "redirect:/profile";
     }
 
 }

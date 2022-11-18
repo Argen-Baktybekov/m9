@@ -1,19 +1,32 @@
 package edu.attractor.kg.m9.service;
 
 import edu.attractor.kg.m9.entities.Customer;
+import edu.attractor.kg.m9.exeptions.ResourceNotFoundException;
 import edu.attractor.kg.m9.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
 
-    public Long addNewCustomer(Customer customer) {
+    public Customer getCustoerById(long id){
+        Optional<Customer> c =  customerRepository.findById(id);
+        if (c.isEmpty()){
+            throw new ResourceNotFoundException("Customer not found");
+        }
+        return c.get();
+    }
+    public Long addNewCustomer(Customer customer)  throws SQLException{
+
         Customer save = customerRepository.save(customer);
         return save.getId();
+
     }
 
 //    @Bean

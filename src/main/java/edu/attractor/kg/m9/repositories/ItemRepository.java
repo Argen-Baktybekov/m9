@@ -21,7 +21,7 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
     List<Item> findAllByCategoryOrderById(String category);
 
     @Query
-    List<Item> findItemByNameIgnoreCaseOrDescriptionContains(String name, String Descrption);
+    Page<Item> findItemByNameIgnoreCaseOrDescriptionContains(String name, String description, Pageable pageable);
 
 
 

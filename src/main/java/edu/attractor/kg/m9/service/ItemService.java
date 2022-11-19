@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
@@ -34,6 +36,15 @@ public void changeDescription(){
         itemRepository.changeDescription(newDescription, id);
 }
 
+public Page<Item> searchItem(String search, int page){
+    int count = 3;
+    Sort sortBy = Sort.by(Sort.Order.asc("price"));
+    Pageable pageable = PageRequest.of(page, count, sortBy);
+    Page<Item> pageResult =itemRepository.findItemByNameIgnoreCaseOrDescriptionContains(search, search,pageable);
+    return pageResult;
+
+}
+
 //        @Bean
         public void print (){
         System.out.println(getItemPageSortedAscPrice().getContent());
@@ -41,8 +52,9 @@ public void changeDescription(){
         itemRepository.changePrice(9.0,1l);
         System.out.println(getItemPageSortedAscPrice().getContent());
             System.out.println(itemRepository.findAllByCategoryOrderById(Category.FLOWERS.toString()));
-            System.out.println(itemRepository.findItemByNameIgnoreCaseOrDescriptionContains("rose", "rose"));
+//            System.out.println(itemRepository.findItemByNameIgnoreCaseOrDescriptionContains("rose", "rose"));
             System.out.println(itemRepository.getItemsByMaxPrice(10.0));
 
         }
+
 }

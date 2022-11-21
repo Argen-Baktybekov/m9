@@ -1,17 +1,30 @@
 'use strict'
-const  BASE_URL = "http://172.29.177.44:8081";
+// const  BASE_URL = "http://172.29.177.44:8081";
+const  BASE_URL = "http://192.168.33.128:8081";
 
-// const SEARCH_URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
-// const INGREDIENT_URL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
-// const SEARCH_BY_ID_URL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
-
+let PAGE = 0;
+let SIZE = 3;
+let INPUT_VALUE;
 
 const searchButton = document.getElementById('search-button');
 
 searchButton.addEventListener('click', () => {
     const searchInput = document.getElementById('search-input');
-    const inputValue = searchInput.value;
-    getPage(inputValue,0)
+    INPUT_VALUE = searchInput.value;
+    getPage(INPUT_VALUE)
+});
+
+const prevButton = document.getElementById('prev');
+prevButton.addEventListener('click', () => {
+    if (PAGE >0){
+        PAGE--;
+        getPage(INPUT_VALUE)
+    }
+});
+const nextButton = document.getElementById('next');
+nextButton.addEventListener('click', () => {
+    PAGE++;
+    getPage(INPUT_VALUE)
 });
 
 function createItem(post){
@@ -28,8 +41,8 @@ function createItem(post){
     newPost.append(cardBody);
 
     cardBody.innerHTML =
-        '<span  class="bookmark h2 mx-2 muted "><i class="bi bi-bookmark ms-auto"></i></span>' +
-        '<h3> ' +post.name +':'+ post.price + '</h3>\n' +
+
+        '<h5> ' +'<span  class="bookmark h2 mx-2 muted text-end"><i class="bi bi-cart4 "></i></span>' + post.name +': '+ post.price +"$"+ '</h5>\n' +
 
         '<button type="submit"  class="btn btn-primary">Buy</button>';
 
@@ -42,9 +55,11 @@ function addItem(item){
         // addBookmarkFunction(postElement);
         document.getElementById("contents").prepend(itemElement);
 }
-function getPage (inputValue, page){
-    axios.get(BASE_URL + "/item/searchItems?item="+inputValue+"&page="+page)
+function getPage (inputValue){
+
+    axios.get(BASE_URL + "/item/searchItems?item="+inputValue+"&page="+PAGE+"&size="+SIZE)
         .then(function (response) {
+            document.getElementById("contents").innerHTML="";
             let items = response.data;
             console.log(response.data);
             items.forEach(

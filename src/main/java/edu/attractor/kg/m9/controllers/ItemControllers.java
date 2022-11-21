@@ -24,8 +24,8 @@ public class ItemControllers {
 
 
     @GetMapping("/searchItems")
-    public ResponseEntity<List<Item>> searchItems(@RequestParam String item, @RequestParam int page){
-        return new  ResponseEntity<>(itemService.searchItem(item, page).getContent(), HttpStatus.OK);
+    public ResponseEntity<List<Item>> searchItems(@RequestParam String item, @RequestParam int page, @RequestParam int size){
+        return new  ResponseEntity<>(itemService.searchItem(item, page, size).getContent(), HttpStatus.OK);
     }
 
 

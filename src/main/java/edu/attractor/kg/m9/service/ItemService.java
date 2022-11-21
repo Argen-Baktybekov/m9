@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -36,13 +37,11 @@ public void changeDescription(){
         itemRepository.changeDescription(newDescription, id);
 }
 
-public Page<Item> searchItem(String search, int page){
-    int count = 3;
+public Page<Item> searchItem(String search, int page, int size){
     Sort sortBy = Sort.by(Sort.Order.asc("price"));
-    Pageable pageable = PageRequest.of(page, count, sortBy);
+    Pageable pageable = PageRequest.of(page, size, sortBy);
     Page<Item> pageResult =itemRepository.findItemByNameIgnoreCaseOrDescriptionContains(search, search,pageable);
     return pageResult;
-
 }
 
 //        @Bean

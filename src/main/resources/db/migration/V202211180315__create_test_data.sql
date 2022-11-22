@@ -1,11 +1,26 @@
 insert into items (category, description, image, name, price, number)
-VALUES ('FLOWERS', 'flowers for You', 'image1.jpeg', 'Rose', 15, 1);
+VALUES ('FLOWERS', 'flowers for You', 'images/1.jpeg', 'Rose', 15, 1);
 
 insert into items (category, description, image, name, price, number)
-VALUES ('FLOWERS', 'flowers for You', 'image2.jpeg', 'Tulpan', 10, 3);
+VALUES ('FLOWERS', 'flowers for You', 'images/anon.jpeg', 'Rose', 15, 1);
 
 insert into items (category, description, image, name, price, number)
-VALUES ('FLOWERS', 'flowers for You', 'image3.jpeg', 'Astra', 5, 3);
+VALUES ('FLOWERS', 'flowers for You', 'images/6.jpeg', 'Rose', 15, 1);
+
+insert into items (category, description, image, name, price, number)
+VALUES ('FLOWERS', 'flowers for You', 'images/2.jpeg', 'Tulpan', 10, 3);
+
+insert into items (category, description, image, name, price, number)
+VALUES ('FLOWERS', 'flowers for You', 'images/3.jpeg', 'Astra', 5, 3);
+
+insert into items (category, description, image, name, price, number)
+VALUES ('FLOWERS', 'flowers for You', 'images/2.jpeg', 'Astra', 5, 3);
+
+insert into items (category, description, image, name, price, number)
+VALUES ('FLOWERS', 'flowers for You', 'images/4.jpeg', 'Astra', 5, 3);
+
+insert into items (category, description, image, name, price, number)
+VALUES ('FLOWERS', 'flowers for You', 'images/5.jpeg', 'Astra', 5, 3);
 
 
 insert into customers(firs_name, last_name, email, password, phone)

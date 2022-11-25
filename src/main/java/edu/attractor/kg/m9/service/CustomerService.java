@@ -4,8 +4,6 @@ import edu.attractor.kg.m9.entities.Customer;
 import edu.attractor.kg.m9.exeptions.ResourceNotFoundException;
 import edu.attractor.kg.m9.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +26,7 @@ public class CustomerService {
     public Long addNewCustomer(Customer customer)  throws SQLException{
         customer.setPassword(encoder.encode(customer.getPassword()));
         Customer saved = customerRepository.save(customer);
-//        customerRepository.saveAuthorities(customer.getEmail());
+        customerRepository.saveAuthorities(customer.getEmail());
         return saved.getId();
     }
 

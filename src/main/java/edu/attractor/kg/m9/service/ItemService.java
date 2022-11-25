@@ -22,7 +22,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
 
-    private Page<Item> getItemPageSortedAscPrice(){
+    public Page<Item> getItemPageSortedAscPrice(){
         int page = 0;
         int count = 10;
         Sort sortBy = Sort.by(Sort.Order.asc("price"));

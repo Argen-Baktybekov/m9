@@ -12,13 +12,22 @@ create table customers
         primary key,
     firs_name   varchar(30),
     last_name   varchar(30),
-    email       varchar(45),
-    password    varchar(255),
+    email       varchar(45) NOT NULL unique ,
+    password    varchar(255) NOT NULL,
     phone       varchar(30),
     card_number varchar(16),
+    enabled     boolean not null default true,
+    role       varchar(16) not null default 'USER',
     basket_id   bigint
         constraint fkm1fvhmsboke8kuww98n60ekqt
             references baskets
+);
+
+create table authorities(
+    username varchar(50) not null primary key
+                        constraint authorities_users_fk references customers(email)
+                        on delete cascade on update cascade ,
+    authority varchar(50) not null
 );
 
 create table items

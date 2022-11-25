@@ -24,7 +24,10 @@ VALUES ('FLOWERS', 'flowers for You', 'images/5.jpeg', 'Astra', 5, 3);
 
 
 insert into customers(firs_name, last_name, email, password, phone)
-VALUES('Argen', 'Baktybekov', 'a@test.com', 'qwerty', '0703039401');
+VALUES('Argen', 'Baktybekov', 'a@test.com', '$2a$10$PaB43DWvQCJm9buZXV92/uhXwxUVMk0cQvtwhcydRbt9KKgvU9Vey', '0703039401');
+
+insert into authorities (username)
+VALUES('a@test.com');
 
 insert into orders(time, customer_id)
 values ('2022-11-14 18:41:33.000000', 1);
@@ -37,3 +40,4 @@ insert into orders_items(order_id, items_id)
 values (1, 2);
 insert into orders_items(order_id, items_id)
 values (1, 3);
+

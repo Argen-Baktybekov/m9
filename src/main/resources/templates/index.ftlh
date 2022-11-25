@@ -45,6 +45,9 @@
             <a class="nav-link" href="#">My basket</a>
           </li>
           <li class="nav-item me-4">
+            <a class="nav-link" href="/customer/newCustomer">New account</a>
+          </li>
+          <li class="nav-item me-4">
 
                             <span type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#newpost">
                                 New Item

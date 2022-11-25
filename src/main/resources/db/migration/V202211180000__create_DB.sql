@@ -27,7 +27,7 @@ create table authorities(
     username varchar(50) not null primary key
                         constraint authorities_users_fk references customers(email)
                         on delete cascade on update cascade ,
-    authority varchar(50) not null
+    authority varchar(50) not null default 'USER'
 );
 
 create table items

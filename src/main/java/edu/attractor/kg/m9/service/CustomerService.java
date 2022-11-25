@@ -5,6 +5,8 @@ import edu.attractor.kg.m9.exeptions.ResourceNotFoundException;
 import edu.attractor.kg.m9.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final PasswordEncoder encoder;
 
     public Customer getCustoerById(long id){
         Optional<Customer> c =  customerRepository.findById(id);
@@ -23,10 +26,10 @@ public class CustomerService {
         return c.get();
     }
     public Long addNewCustomer(Customer customer)  throws SQLException{
-
-        Customer save = customerRepository.save(customer);
-        return save.getId();
-
+        customer.setPassword(encoder.encode(customer.getPassword()));
+        Customer saved = customerRepository.save(customer);
+//        customerRepository.saveAuthorities(customer.getEmail());
+        return saved.getId();
     }
 
 //    @Bean
@@ -42,4 +45,5 @@ public class CustomerService {
         System.out.println(customerRepository.findAll());
 
     }
+
 }

@@ -26,12 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/login.html")
-                .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/item",true)
+                .defaultSuccessUrl("/",true)
                 .failureUrl("/login.html?error=true")
-                .and()
-                .logout();
+                .and().logout()
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login")
+        ;
     }
 
     @Override

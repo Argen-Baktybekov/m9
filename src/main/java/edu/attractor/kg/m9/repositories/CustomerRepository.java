@@ -12,6 +12,9 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
+
+    @Query(nativeQuery = true,value = "insert into authorities(username) values (:email)")
+    void saveAuthorities(String email);
     @Query
     List<Customer> findCustomersByFirstNameAndLastNameContains(String firstName, String lastName);
     @Query

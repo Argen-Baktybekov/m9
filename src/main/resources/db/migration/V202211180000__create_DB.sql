@@ -24,7 +24,8 @@ create table customers
 );
 
 create table authorities(
-    username varchar(50) not null primary key
+    id          bigserial    primary key,
+    username varchar(50) not null
                         constraint authorities_users_fk references customers(email)
                         on delete cascade on update cascade ,
     authority varchar(50) not null default 'USER'

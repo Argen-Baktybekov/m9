@@ -62,11 +62,12 @@
             name="${(_csrf.parameterName)!'csrf'}"
             value="${(_csrf.token)!'--no-token--'}"
             />
-            </#if>
+
         <button type="submit" id="logout" class="btn btn-danger ms-auto text-uppercase fw-bold" >
           <i class="bi bi-box-arrow-right"></i>
         </button>
           </form>
+        </#if>
       </div>
     </div>
   </nav>

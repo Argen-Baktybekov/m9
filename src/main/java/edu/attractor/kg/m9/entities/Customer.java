@@ -1,20 +1,15 @@
 package edu.attractor.kg.m9.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Data
 @RequiredArgsConstructor
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Entity
 @Table(name = "customers")
 public class Customer {

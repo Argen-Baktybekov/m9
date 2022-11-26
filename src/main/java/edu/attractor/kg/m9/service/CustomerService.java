@@ -1,7 +1,9 @@
 package edu.attractor.kg.m9.service;
 
+import edu.attractor.kg.m9.entities.Authority;
 import edu.attractor.kg.m9.entities.Customer;
 import edu.attractor.kg.m9.exeptions.ResourceNotFoundException;
+import edu.attractor.kg.m9.repositories.AuthorityRepository;
 import edu.attractor.kg.m9.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder encoder;
 
     public Customer getCustoerById(long id){
@@ -26,7 +29,10 @@ public class CustomerService {
     public Long addNewCustomer(Customer customer)  throws SQLException{
         customer.setPassword(encoder.encode(customer.getPassword()));
         Customer saved = customerRepository.save(customer);
-        customerRepository.saveAuthorities(customer.getEmail());
+        Authority authority = new Authority();
+        authority.setUsername(customer.getEmail());
+        authority.setAuthority("USER");
+        authorityRepository.save(authority);
         return saved.getId();
     }
 

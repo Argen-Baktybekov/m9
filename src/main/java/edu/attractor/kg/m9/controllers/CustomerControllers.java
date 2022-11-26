@@ -47,5 +47,4 @@ public class CustomerControllers {
             throw new ResourceNotFoundException(e.getMessage());
         }
     }
-
 }

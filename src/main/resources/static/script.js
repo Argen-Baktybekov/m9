@@ -11,6 +11,7 @@ const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', () => {
     const searchInput = document.getElementById('search-input');
     INPUT_VALUE = searchInput.value;
+    PAGE = 0;
     getPage(INPUT_VALUE)
 });
 
@@ -64,7 +65,7 @@ function getPage (inputValue){
             console.log(response.data);
             items.forEach(
                 (item) => { addItem(item) });
-        })
+      })
         .catch(function (error) {
             console.log('error from back: ' + error);
         });

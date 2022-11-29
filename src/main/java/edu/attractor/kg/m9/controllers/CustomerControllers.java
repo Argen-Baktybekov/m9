@@ -1,10 +1,13 @@
 package edu.attractor.kg.m9.controllers;
 
+import edu.attractor.kg.m9.entities.Basket;
 import edu.attractor.kg.m9.entities.Customer;
 import edu.attractor.kg.m9.exeptions.CustomerNotValidException;
 import edu.attractor.kg.m9.exeptions.ResourceNotFoundException;
+import edu.attractor.kg.m9.service.BasketService;
 import edu.attractor.kg.m9.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -20,6 +24,7 @@ import javax.validation.Valid;
 @RequestMapping("/customer")
 public class CustomerControllers {
     private final CustomerService customerService;
+    private final BasketService basketService;
 
     @GetMapping("/newCustomer")
     public String newCustomer (Model model){
@@ -46,5 +51,20 @@ public class CustomerControllers {
         }catch (ResourceNotFoundException e){
             throw new ResourceNotFoundException(e.getMessage());
         }
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         Authentication authentication){
+
+        var session = request.getSession();
+        Basket basket = (Basket) session.getAttribute("basket");
+        if (basket != null) {
+            basketService.saveMyBasket(basket, authentication.getName());
+        }
+        session.invalidate();
+
+        return "redirect:/";
+
     }
 }

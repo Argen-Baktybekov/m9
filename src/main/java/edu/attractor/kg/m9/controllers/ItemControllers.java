@@ -17,7 +17,11 @@ import java.util.List;
 //@RequestMapping("/item")
 public class ItemControllers {
     private final ItemService itemService;
-
+    @GetMapping(value = "/")
+    public String getAllItems(Model model){
+        model.addAttribute("items", itemService.getItemPageSortedAscPrice().getContent());
+        return "index";
+    }
     @GetMapping(value = "/item")
     public String getItems(Model model){
         model.addAttribute("items", itemService.getItemPageSortedAscPrice().getContent());

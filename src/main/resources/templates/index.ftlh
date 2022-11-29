@@ -42,7 +42,7 @@
 
           </li>
           <li class="nav-item me-4">
-            <a class="nav-link" href="#">My basket</a>
+            <a class="nav-link" href="/user/basket">My basket</a>
           </li>
           <li class="nav-item me-4">
             <a class="nav-link" href="/customer/newCustomer">New account</a>
@@ -75,12 +75,46 @@
 
 <div class="container mt-5 mb-5 ">
 
-
-
   <div class="container mt-5 mb-5">
     <h2 class="section-title text-center"></h2>
     <div class="row" id="contents">
           <!--CONTENT-->
+
+      <#list items as item>
+        <div class="card" style="width: 18rem;">
+          <img src="${item.image}" class="card-img-top" alt="${item.name}">
+          <div class="card-body">
+            <h5 class="card-title">${item.name}</h5>
+            <p class="card-text">${item.description}</p>
+          </div>
+          <div class="card-footer">
+            <form action="/user/basket/item" method="post">
+              <#if _csrf??>
+                <input type="hidden"
+                       name="${(_csrf.parameterName)!'csrf-param-name'}"
+                       value="${(_csrf.token)!'csrf-token'}" />
+              </#if>
+              <input type="hidden" name="itemId" value="${item.id}">
+              <button type="submit">ADD</button>
+            </form>
+<#--            <form action="/user/basket/delete/item" method="post">-->
+<#--              <input type="hidden" name="itemId" value="${item.id}">-->
+<#--              <button type="submit">DELETE</button>-->
+<#--            </form>-->
+            <form action="/order" method="post">
+              <#if _csrf??>
+                <input type="hidden"
+                       name="${(_csrf.parameterName)!'csrf-param-name'}"
+                       value="${(_csrf.token)!'csrf-token'}" />
+              </#if>
+              <input type="hidden" name="item" value="${item}">
+              <button type="submit" >ORDER</button>
+            </form>
+          </div>
+        </div>
+      </#list>
+
+
     </div>
       <button type="button" id="prev" class="btn btn-primary" >
         prev

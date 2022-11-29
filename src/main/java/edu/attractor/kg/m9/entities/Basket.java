@@ -18,6 +18,9 @@ public class Basket {
     @NotEmpty
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Customer customer;
+
     @OneToMany(fetch = FetchType.LAZY)
     @OrderBy("price ASC")
     private List<Item> items;

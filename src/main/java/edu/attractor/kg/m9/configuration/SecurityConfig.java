@@ -26,11 +26,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .defaultSuccessUrl("/",true)
-                .failureUrl("/login.html?error=true")
-                .and().logout()
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/login")
-        ;
+                .failureUrl("/login.html?error=true");
+//                .and().logout()
+//                .addLogoutHandler()
+//                .deleteCookies("JSESSIONID")
+//                .logoutSuccessUrl("/login");
+        http.authorizeRequests()
+                .antMatchers("/api/**").fullyAuthenticated()
+                .antMatchers("/user/**").authenticated()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/user/new").permitAll();
+
+//                .anyRequest().authenticated();
     }
 
     @Override

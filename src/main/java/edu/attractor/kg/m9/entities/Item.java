@@ -1,5 +1,6 @@
 package edu.attractor.kg.m9.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "items")
 public class Item {
@@ -40,6 +42,5 @@ public class Item {
 
     @Column(name = "in_stock", columnDefinition = "boolean default true")
     private boolean inStock;
-
 
 }

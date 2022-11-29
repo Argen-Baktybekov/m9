@@ -40,7 +40,5 @@ public class Customer {
     @Column(name = "card_number")
     private String cardNumber;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Basket basket;
 
 }

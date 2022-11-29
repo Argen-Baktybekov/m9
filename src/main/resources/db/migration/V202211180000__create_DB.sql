@@ -1,11 +1,4 @@
 
-create table baskets
-(
-    id        bigserial
-        primary key,
-    last_date date
-);
-
 create table customers
 (
     id          bigserial
@@ -17,10 +10,17 @@ create table customers
     phone       varchar(30),
     card_number varchar(16),
     enabled     boolean not null default true,
-    role       varchar(16) not null default 'USER',
-    basket_id   bigint
+    role       varchar(16) not null default 'USER'
+);
+
+create table baskets
+(
+    id        bigserial
+        primary key,
+    customer_id   bigint
         constraint fkm1fvhmsboke8kuww98n60ekqt
-            references baskets
+            references customers,
+    last_date date
 );
 
 create table authorities(

@@ -15,17 +15,18 @@
     <div class="card" style="width: 18rem;">
         <img src="${item.image}" class="card-img-top" alt="${item.name}">
         <div class="card-body">
-            <h5 class="card-title">${item.name}</h5>
+            <h5 class="card-title">${item.name}: ${item.number}pcs</h5>
             <p class="card-text">${item.description}</p>
+            <p class="card-text">${item.price}$/pcs</p>
         </div>
         <div class="card-footer">
-            <form action="/user/basket/item" method="post">
+            <form action="/user/basket/itemplus" method="post">
                 <#if _csrf??>
                     <input type="hidden"
                            name="${(_csrf.parameterName)!'csrf-param-name'}"
                            value="${(_csrf.token)!'csrf-token'}" />
                 </#if>
-                <input type="hidden" name="item" value="${item}">
+                <input type="hidden" name="itemId" value="${item.id}">
                 <button type="submit">ADD</button>
             </form>
             <form action="/user/basket/delete/item" method="post">

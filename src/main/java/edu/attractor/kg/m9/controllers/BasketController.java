@@ -72,4 +72,29 @@ public class BasketController {
         return "basket";
     }
 
+    @PostMapping("/itemplus")
+    public String plusItemToBasket(HttpServletRequest request,
+                                  Long itemId,
+                                  Model model,
+                                  Authentication authentication) {
+        var session = request.getSession();
+        Basket basket = (Basket) session.getAttribute("basket");
+//        Item item = itemService.getItemById(itemId);
+//        if (basket == null) {
+//            basket = basketService.getMyBasket(authentication.getName());
+//        }
+//        if (item == null) {
+//            return "redirect:/login";
+//        }
+
+        for (var item : basket.getItems()) {
+            if (item.getId() == itemId) {
+               item.setNumber(item.getNumber()+1);
+                break;
+            }
+        }
+        model.addAttribute("basket", basket);
+        session.setAttribute("basket", basket);
+        return "basket";
+    }
 }

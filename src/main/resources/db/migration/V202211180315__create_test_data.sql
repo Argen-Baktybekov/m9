@@ -41,3 +41,12 @@ values (1, 2);
 insert into orders_items(order_id, items_id)
 values (1, 3);
 
+insert into baskets(customer_id)
+values (1);
+
+insert into baskets_items(basket_id, items_id)
+values (1, 1);
+insert into baskets_items(basket_id, items_id)
+values (1, 2);
+insert into baskets_items(basket_id, items_id)
+values (1, 3);

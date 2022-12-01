@@ -46,17 +46,19 @@ public class BasketController {
             basket = basketService.getMyBasket(authentication.getName());
         }
         if (item == null) {
+//            basketService.saveMyBasket(basket,authentication.getName());
             return "redirect:/login";
         }
         basket.getItems().add(item);
         model.addAttribute("basket", basket);
         session.setAttribute("basket", basket);
+        basketService.saveMyBasket(basket,authentication.getName());
         return "basket";
     }
 
     @PostMapping("/delete/item")
     public String deleteItemFromBasket(HttpServletRequest request,
-
+                                        Authentication authentication,
                                        Long itemId,
                                        Model model) {
         var session = request.getSession();
@@ -69,6 +71,7 @@ public class BasketController {
         }
         model.addAttribute("basket", basket);
         session.setAttribute("basket", basket);
+        basketService.saveMyBasket(basket,authentication.getName());
         return "basket";
     }
 
@@ -79,14 +82,6 @@ public class BasketController {
                                   Authentication authentication) {
         var session = request.getSession();
         Basket basket = (Basket) session.getAttribute("basket");
-//        Item item = itemService.getItemById(itemId);
-//        if (basket == null) {
-//            basket = basketService.getMyBasket(authentication.getName());
-//        }
-//        if (item == null) {
-//            return "redirect:/login";
-//        }
-
         for (var item : basket.getItems()) {
             if (item.getId() == itemId) {
                item.setNumber(item.getNumber()+1);
@@ -95,6 +90,7 @@ public class BasketController {
         }
         model.addAttribute("basket", basket);
         session.setAttribute("basket", basket);
+        basketService.saveMyBasket(basket,authentication.getName());
         return "basket";
     }
 }

@@ -16,8 +16,9 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
     @Query("select b from Basket b where b.customer.email = :email")
     Basket findByEmail(@Param("email") String email);
 
-    @Modifying
-    @Transactional
-    @Query("update Basket b set b.items = :basket where b.customer.email = :email")
-    void updateBasket(Basket basket,@Param("email") String email);
+//    @Modifying
+//    @Transactional
+//    @Query("update Basket b set b.items = :basket where b.customer.email = :email")
+//    void updateBasket(Basket basket,@Param("email") String email);
+
 }

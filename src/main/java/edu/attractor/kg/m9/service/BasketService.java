@@ -16,6 +16,11 @@ public class BasketService {
     }
 
     public void saveMyBasket(Basket basket, String email) {
-        basketRepository.updateBasket(basket, email);
+//        basketRepository.deleteById(basket.getId());
+//        basketRepository
+//        basketRepository.save(basket);
+        basketRepository.saveAndFlush(basket);
+
+//        basketRepository.updateBasket(basket, email);
     }
 }

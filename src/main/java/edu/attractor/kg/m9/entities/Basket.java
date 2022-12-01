@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,14 +19,10 @@ public class Basket {
     @NotEmpty
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @OrderBy("price ASC")
-    private List<Item> items;
-
-    @Column(name = "last_date")
-    private LocalDate lastDate;
-
+    @OneToMany(mappedBy = "basket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemWA> itemsWA;
 }

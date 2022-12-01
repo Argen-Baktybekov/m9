@@ -1,6 +1,7 @@
 package edu.attractor.kg.m9.repositories;
 
 import edu.attractor.kg.m9.entities.Basket;
+import edu.attractor.kg.m9.entities.Customer;
 import edu.attractor.kg.m9.entities.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,7 +19,7 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
 
 //    @Modifying
 //    @Transactional
-//    @Query("update Basket b set b.items = :basket where b.customer.email = :email")
-//    void updateBasket(Basket basket,@Param("email") String email);
+//    @Query("update Basket b set Basket = :basket where b.id = 1L")
+//    void updateBasket(Basket basket, Long bId );
 
 }

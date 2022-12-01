@@ -26,6 +26,13 @@ public class CustomerService {
         }
         return c.get();
     }
+    public Customer getCustomerByEmail(String email){
+      Customer customer =  customerRepository.findCustomersByEmail(email);
+        if (customer == null ){
+            throw new ResourceNotFoundException("Customer not found");
+        }
+        return customer;
+    }
     public Long addNewCustomer(Customer customer)  throws SQLException{
         customer.setPassword(encoder.encode(customer.getPassword()));
         Customer saved = customerRepository.save(customer);

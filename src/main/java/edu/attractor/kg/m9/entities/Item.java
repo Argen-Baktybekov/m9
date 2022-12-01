@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -33,9 +34,6 @@ public class Item {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "number", columnDefinition = "integer default 1")
-    private Integer number;
-
     @Column(name = "price")
     @NotNull
     private Double price;
@@ -43,4 +41,6 @@ public class Item {
     @Column(name = "in_stock", columnDefinition = "boolean default true")
     private boolean inStock;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Review> review;
 }

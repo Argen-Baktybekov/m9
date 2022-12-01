@@ -48,6 +48,10 @@
             <a class="nav-link" href="/customer/newCustomer">New account</a>
           </li>
           <li class="nav-item me-4">
+            <a class="nav-link" href="/customer/profile"><i class="bi bi-person-circle"></i></a>
+          </li>
+
+          <li class="nav-item me-4">
 
                             <span type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#newpost">
                                 New Item
@@ -95,12 +99,8 @@
                        value="${(_csrf.token)!'csrf-token'}" />
               </#if>
               <input type="hidden" name="itemId" value="${item.id}">
-              <button type="submit">ADD</button>
+              <button class="btn btn-danger" type="submit"><i class="bi bi-cart4 "></i></button>
             </form>
-<#--            <form action="/user/basket/delete/item" method="post">-->
-<#--              <input type="hidden" name="itemId" value="${item.id}">-->
-<#--              <button type="submit">DELETE</button>-->
-<#--            </form>-->
             <form action="/order" method="post">
               <#if _csrf??>
                 <input type="hidden"
@@ -108,7 +108,7 @@
                        value="${(_csrf.token)!'csrf-token'}" />
               </#if>
               <input type="hidden" name="item" value="${item}">
-              <button type="submit" >ORDER</button>
+              <button class="btn btn-primary" type="submit" >ORDER</button>
             </form>
           </div>
         </div>
@@ -138,6 +138,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="script.js"></script>
+<script src="scripts/script.js"></script>
 </body>
 </html>

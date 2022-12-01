@@ -15,6 +15,6 @@ public class Authority {
     private Long id;
     @Column(name = "username")
     private String username;
-    @Column(name = "authority", columnDefinition = "USER")
+    @Column(name = "authority", columnDefinition = "varchar(45) default 'USER'")
     private String authority;
 }

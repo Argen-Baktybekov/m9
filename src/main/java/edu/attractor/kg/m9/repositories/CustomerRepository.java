@@ -20,6 +20,8 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
     @Query
     List<Customer> findCustomersByPhoneContains(String phone);
 
+    Customer findCustomersByEmail(String email);
+
     @Modifying
     @Transactional
     @Query("update Customer SET firstName = :firstName where id = :id")

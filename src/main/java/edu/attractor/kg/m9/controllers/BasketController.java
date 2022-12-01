@@ -3,15 +3,19 @@ package edu.attractor.kg.m9.controllers;
 import edu.attractor.kg.m9.entities.Basket;
 import edu.attractor.kg.m9.entities.Customer;
 import edu.attractor.kg.m9.entities.Item;
+import edu.attractor.kg.m9.entities.ItemWA;
 import edu.attractor.kg.m9.service.BasketService;
 import edu.attractor.kg.m9.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/basket")
@@ -46,14 +50,23 @@ public class BasketController {
             basket = basketService.getMyBasket(authentication.getName());
         }
         if (item == null) {
-//            basketService.saveMyBasket(basket,authentication.getName());
             return "redirect:/login";
         }
-        basket.getItems().add(item);
+        boolean basketHas = false;
+        for (ItemWA i:basket.getItemsWA() ) {
+            if (i.getItem().equals(item)){
+                basketHas=true;
+                break;
+            }
+        }
+        if (!basketHas){
+            basket.getItemsWA().add(new ItemWA(item, basket));
+
+            session.setAttribute("basket", basket);
+            basketService.saveMyBasket(basket,authentication.getName());
         model.addAttribute("basket", basket);
-        session.setAttribute("basket", basket);
-        basketService.saveMyBasket(basket,authentication.getName());
-        return "basket";
+        }
+            return "basket";
     }
 
     @PostMapping("/delete/item")
@@ -63,12 +76,7 @@ public class BasketController {
                                        Model model) {
         var session = request.getSession();
         Basket basket = (Basket) session.getAttribute("basket");
-        for (var item : basket.getItems()) {
-            if (item.getId() == itemId) {
-                basket.getItems().remove(item);
-                break;
-            }
-        }
+        basket.getItemsWA().removeIf(itemWA -> itemWA.getItem().getId().equals(itemId));
         model.addAttribute("basket", basket);
         session.setAttribute("basket", basket);
         basketService.saveMyBasket(basket,authentication.getName());
@@ -82,9 +90,9 @@ public class BasketController {
                                   Authentication authentication) {
         var session = request.getSession();
         Basket basket = (Basket) session.getAttribute("basket");
-        for (var item : basket.getItems()) {
-            if (item.getId() == itemId) {
-               item.setNumber(item.getNumber()+1);
+        for (var itemWA : basket.getItemsWA()) {
+            if (itemWA.getItem().getId().equals(itemId)) {
+               itemWA.setNumber(itemWA.getNumber()+1);
                 break;
             }
         }

@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data

@@ -1,6 +1,5 @@
 package edu.attractor.kg.m9.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +14,7 @@ public class ItemWA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.DETACH)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
 

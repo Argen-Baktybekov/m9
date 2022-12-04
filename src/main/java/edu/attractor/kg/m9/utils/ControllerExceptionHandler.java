@@ -11,17 +11,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(value = {ResourceNotFoundException.class})
-
-    public ResponseEntity<String> resourceNotFoundException(ResourceNotFoundException e){
-
+    public ResponseEntity<String> resourceNotFoundException(ResourceNotFoundException e) {
         return ResponseEntity.ok(e.getMessage());
     }
 
     @ExceptionHandler(value = {CustomerNotValidException.class})
-    public ResponseEntity<String> customerNotValidException(CustomerNotValidException e){
-
+    public ResponseEntity<String> customerNotValidException(CustomerNotValidException e) {
         return ResponseEntity.ok(e.getMessage());
     }
-
-
 }

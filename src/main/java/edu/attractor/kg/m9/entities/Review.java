@@ -1,6 +1,5 @@
 package edu.attractor.kg.m9.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

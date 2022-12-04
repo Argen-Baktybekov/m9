@@ -35,7 +35,7 @@
                 </ul>
                 <hr class="text-white">
                 <#if _csrf??>
-                    <form action="/logout" method="post">
+                    <form action="/customer/save" method="post">
                         <input type="hidden"
                                name="${(_csrf.parameterName)!'csrf'}"
                                value="${(_csrf.token)!'--no-token--'}"
@@ -59,8 +59,8 @@
             <div class="card" style="width: 18rem;">
                 <img src="/${itemWA.item.image}" class="card-img-top" alt="${itemWA.item.name}">
                 <div class="card-body">
-                    <h5 class="card-title">${itemWA.item.name}</h5>
-                    <p class="card-text">${itemWA.item.description}</p>
+                    <h5 class="card-title">${itemWA.item.name} : ${itemWA.number}pcs</h5>
+                    <p class="card-text">${itemWA.item.price}$/pcs   Total:${itemWA.number * itemWA.item.price}$</p>
                 </div>
                 <div class="card-footer">
 
@@ -78,15 +78,47 @@
         </#list>
     </div>
     <div class="my-orders">
-
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Item</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+                <th scope="col">Review</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#list orders as order>
+            <tr>
+                <th scope="row">${order?counter}</th>
+                <td>${order.time}</td>
+                <td>${order.item.name}</td>
+                <td>${order.amount}</td>
+                <td>${order.price}</td>
+                <td>${order.total}</td>
+                <td>
+                    <form class="form-outline input-group" action="/review" method="post">
+                        <input type="hidden"
+                               name="${(_csrf.parameterName)!'csrf'}"
+                               value="${(_csrf.token)!'--no-token--'}"
+                        />
+                        <input type="text"  class="form-control" name="review" placeholder="Comment"/>
+                        <input type="hidden"  class="form-control" name="itemId" value="${order.item.id}"/>
+                        <button  type="submit" class="btn btn-outline-secondary">Send</button>
+                    </form>
+                </td>
+            </tr>
+            </#list>
+            </tbody>
+        </table>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="scripts/profile.js"></script>
 </body>
 </html>

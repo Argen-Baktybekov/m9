@@ -46,15 +46,12 @@ public class CustomerService {
 //    @Bean
     public void printCustomer(){
         System.out.println(customerRepository.findAll());
-
         customerRepository.changeLastName("Baktybekov", 1L);
         customerRepository.changeName("qwerty", 1L);
         System.out.println(customerRepository.findCustomersByFirstNameAndLastNameContains("qwerty", "argen"));
         customerRepository.changePhone("996703039401", 1L);
         System.out.println(customerRepository.findCustomersByPhoneContains("039401"));
-
         System.out.println(customerRepository.findAll());
-
     }
 
 }

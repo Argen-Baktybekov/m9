@@ -11,17 +11,14 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query(nativeQuery = true, value = "select * from orders  where extract(year from time)= :year and extract(month from time)= :month and extract(day from time)= :day")
-    List<Order> findAllByMyDate(int year, int month, int day);
+    List<Order> findAllByTime(int year, int month, int day);
+//
+//    @Query(nativeQuery = true, value = "select * from orders o inner join orders_items oi on o.id = oi.order_id inner join item i on i.id = oi.items_id where i.name = :name")
+//    List<Order> findOrderByItemName(String name);
 
-    @Query(nativeQuery = true, value = "select * from orders o inner join orders_items oi on o.id = oi.order_id inner join item i on i.id = oi.items_id where i.name = :name")
-    List<Order> findOrderByItemName(String name);
+//    @Query(nativeQuery = true, value = "select * from orders o inner join orders_items oi on o.id = oi.order_id inner join item i on i.id = oi.items_id where i.category = :category")
+//    List<Order> findOrderByItemCategory(String category);
 
-    @Query(nativeQuery = true, value = "select * from orders o inner join orders_items oi on o.id = oi.order_id inner join item i on i.id = oi.items_id where i.category = :category")
-    List<Order> findOrderByItemCategory(String category);
-
-    //
-    Order findOrderByCustomerPhone(String phone);
-
-    Order findOrderByCustomer_FirstName(String firstName);
+    List<Order> findOrdersByEmail(String email);
 
 }

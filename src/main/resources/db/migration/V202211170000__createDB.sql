@@ -14,18 +14,15 @@ create table customers
 (
     id          bigserial
         primary key,
-    card_number varchar(255),
-    email       varchar(255),
-    firs_name   varchar(25),
-    last_name   varchar(255),
-    password    varchar(255),
-    phone       varchar(255),
+    firs_name   varchar(30),
+    last_name   varchar(30),
+    email       varchar(45) NOT NULL unique ,
+    password    varchar(255) NOT NULL,
+    phone       varchar(30),
+    card_number varchar(16),
     enabled     boolean not null default true,
     role       varchar(16) not null default 'USER'
 );
-
-alter table customers
-    owner to postgres;
 
 create table baskets
 (
@@ -72,31 +69,19 @@ alter table items_with_amounts
 
 create table orders
 (
-    id          bigserial
+    id      bigserial
         primary key,
-    time        timestamp,
-    total       double precision,
-    customer_id bigint
-        constraint fkpxtb8awmi0dk6smoh2vp1litg
-            references customers
-);
-
-alter table orders
-    owner to postgres;
-
-create table orders_items
-(
-    order_id bigint not null
-        constraint fkij1wwgx6o198ubsx1oulpopem
-            references orders,
-    items_id bigint not null
-        constraint uk_7qrg5pfgjon82yhgwfqrdijm5
-            unique
-        constraint fklbp1l1no3u5k9ry42w038iip7
+    amount  integer,
+    email   varchar(255),
+    price   double precision not null,
+    time    timestamp,
+    total   double precision,
+    item_id bigint
+        constraint fk247nnxschdfm8lre0ssvy3k1r
             references items
 );
 
-alter table orders_items
+alter table orders
     owner to postgres;
 
 create table reviews

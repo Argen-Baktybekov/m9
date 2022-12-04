@@ -8,15 +8,16 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-    @Query(nativeQuery = true,value = "insert into authorities(username) values (:email)")
+    @Query(nativeQuery = true, value = "insert into authorities(username) values (:email)")
     void saveAuthorities(String email);
+
     @Query
     List<Customer> findCustomersByFirstNameAndLastNameContains(String firstName, String lastName);
+
     @Query
     List<Customer> findCustomersByPhoneContains(String phone);
 
@@ -26,10 +27,12 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
     @Transactional
     @Query("update Customer SET firstName = :firstName where id = :id")
     void changeName(String firstName, Long id);
+
     @Modifying
     @Transactional
     @Query("update Customer SET lastName = :lastName where id = :id")
     void changeLastName(String lastName, Long id);
+
     @Transactional
     @Modifying
     @Query("update Customer SET phone = :phone where id = :id")

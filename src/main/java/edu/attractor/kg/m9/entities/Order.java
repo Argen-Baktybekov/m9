@@ -1,34 +1,47 @@
 package edu.attractor.kg.m9.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "orders")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Customer customer;
+    @Column(name = "email")
+    private String email;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @OrderBy("price ASC")
-    private List<Item> items;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Item item;
+
+    @Column(name = "price")
+    @NotNull
+    private Double price;
+
+    @Column(name = "amount")
+    private int amount;
 
     @Column(name = "time")
-    private LocalDateTime time;
+    private Timestamp time;
 
     @Column(name = "total")
     private Double total;
+
+    public Order(String email, ItemWA items) {
+        this.email = email;
+        this.item = items.getItem();
+        this.price = items.getItem().getPrice();
+        this.amount = items.getNumber();
+        this.time = Timestamp.valueOf(LocalDateTime.now());
+        this.total = this.price * this.amount;
+    }
 }

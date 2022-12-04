@@ -1,7 +1,7 @@
 'use strict'
-// const  BASE_URL = "http://172.29.176.210:8081";
+const  BASE_URL = "http://172.29.176.210:8081";
 // const  BASE_URL = "http://192.168.33.128:8081";
-const  BASE_URL = "http://192.168.1.106:8081";
+// const  BASE_URL = "http://192.168.1.106:8081";
 
 let PAGE = 0;
 let SIZE = 3;

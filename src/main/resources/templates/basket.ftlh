@@ -31,7 +31,7 @@
                 </ul>
                 <hr class="text-white">
                 <#if _csrf??>
-                    <form action="/logout" method="post">
+                    <form action="/customer/save" method="post">
                         <input type="hidden"
                                name="${(_csrf.parameterName)!'csrf'}"
                                value="${(_csrf.token)!'--no-token--'}"
@@ -54,9 +54,9 @@
                 <div class="card" style="width: 18rem;">
                     <img src="/${itemWA.item.image}" class="card-img-top" alt="${itemWA.item.name}">
                     <div class="card-body">
-                        <h5 class="card-title">${itemWA.item.name}</h5>
+                        <h5 class="card-title">${itemWA.item.name} : ${itemWA.number}pcs</h5>
                         <p class="card-text">${itemWA.item.description}</p>
-                        <p class="card-text">${itemWA.item.price}$/pcs</p>
+                        <p class="card-text">${itemWA.item.price}$/pcs   Total:${itemWA.number * itemWA.item.price}$</p>
                     </div>
                     <div class="card-footer">
                         <form action="/user/basket/itemplus" method="post">
@@ -84,7 +84,7 @@
                                        value="${(_csrf.token)!'csrf-token'}"/>
                             </#if>
                             <input type="hidden" name="itemId" value="${itemWA.item.id}">
-                            <button class="btn btn-primary" type="submit">ORDER</button>
+                            <button class="btn btn-primary" type="submit">Buy now</button>
                         </form>
                     </div>
                 </div>

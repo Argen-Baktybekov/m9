@@ -17,7 +17,6 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "firs_name")
     @NotBlank(message = "Name should not be empty")
     @Size(min = 2, max = 25, message = "Name should not be empty")

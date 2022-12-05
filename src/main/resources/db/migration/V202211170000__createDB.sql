@@ -90,24 +90,11 @@ create table reviews
         primary key,
     comment  varchar(255),
     time     timestamp,
-    username varchar(255)
+    username varchar(255),
+    item_id  bigint
+        constraint fkd0qivr20lp2u34cfcrr0ibct7
+            references items
 );
 
 alter table reviews
     owner to postgres;
-
-create table items_review
-(
-    item_id   bigint not null
-        constraint fkaoqw5yvvcswi8eblbav7cuati
-            references items,
-    review_id bigint not null
-        constraint uk_11ovqxdfppd1sbemd4b8nc47f
-            unique
-        constraint fk5ig2u489co5p4x87qcjajdmff
-            references reviews
-);
-
-alter table items_review
-    owner to postgres;
-

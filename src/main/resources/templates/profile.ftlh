@@ -100,7 +100,7 @@
                 <td>${order.price}</td>
                 <td>${order.total}</td>
                 <td>
-                    <form class="form-outline input-group" action="/review" method="post">
+                    <form class="form-outline input-group" action="/item/review" method="post">
                         <input type="hidden"
                                name="${(_csrf.parameterName)!'csrf'}"
                                value="${(_csrf.token)!'--no-token--'}"

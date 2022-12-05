@@ -2,7 +2,9 @@ package edu.attractor.kg.m9.service;
 
 import edu.attractor.kg.m9.entities.Category;
 import edu.attractor.kg.m9.entities.Item;
+import edu.attractor.kg.m9.entities.Review;
 import edu.attractor.kg.m9.repositories.ItemRepository;
+import edu.attractor.kg.m9.repositories.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;
+    private final ReviewRepository reviewRepository;
 
     public List<Item> getAll() {
         int page = 0;
@@ -66,5 +69,24 @@ public class ItemService {
             return null;
         }
         return item.get();
+    }
+
+    public void addReview(Long itemId, String comment, String email) {
+        try {
+            Optional<Item> itemOptional = itemRepository.findById(itemId);
+            if (itemOptional.isPresent()) {
+                Item item = itemOptional.get();
+                Review review = new Review(comment, email, item);
+                item.getReview().add(review);
+                itemRepository.saveAndFlush(item);
+            }
+        } catch (Exception e) {
+            System.out.println("Review not saved");
+        }
+    }
+
+    public List<Review> getReviews(Long itemId) {
+        List<Review> reviewsByItem_id = reviewRepository.findReviewsByItem_Id(itemId);
+        return reviewsByItem_id;
     }
 }

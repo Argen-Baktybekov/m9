@@ -41,6 +41,6 @@ public class Item {
     @Column(name = "in_stock", columnDefinition = "boolean default true")
     private boolean inStock;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> review;
 }

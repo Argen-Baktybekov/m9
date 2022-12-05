@@ -31,4 +31,3 @@ VALUES('a@test.com');
 
 insert into baskets(customer_id)
 values (1);
-

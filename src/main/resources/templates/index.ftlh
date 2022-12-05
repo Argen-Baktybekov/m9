@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <meta name="_csrf_token" content="${_csrf.token}"/>
-
+    <#import "/spring.ftl" as spring >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -12,6 +13,7 @@
     <title>m9</title>
 </head>
 <body>
+<#--<@spring.message code="title"/>-->
 <header class="header pb-2">
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
@@ -25,7 +27,7 @@
             <div class="collapse navbar-collapse mt-3" id="navigation">
                 <ul class="navbar-nav text-uppercase">
                     <li class="nav-item me-4">
-                        <a class="nav-link active" aria-current="page" href="#">Category</a>
+                        <a class="nav-link active" aria-current="page" href="#"><@spring.message "category"/></a>
                     </li>
                     <li>
                         <div class="form-outline input-group">
@@ -35,13 +37,12 @@
                                 <i class="bi bi-search"></i>
                             </button>
                         </div>
-
                     </li>
                     <li class="nav-item me-4">
-                        <a class="nav-link" href="/user/basket">My basket</a>
+                        <a class="nav-link" href="/user/basket"><@spring.message "myBasket"/></a>
                     </li>
                     <li class="nav-item me-4">
-                        <a class="nav-link" href="/customer/newCustomer">New account</a>
+                        <a class="nav-link" href="/customer/newCustomer"><@spring.message "register"/></a>
                     </li>
                     <li class="nav-item me-4">
                         <a class="nav-link" href="/customer/profile"><i class="bi bi-person-circle"></i></a>
@@ -67,6 +68,19 @@
                         </button>
                     </form>
                 </#if>
+                <form action="" method="get">
+                    <label for="lang-select">
+                        <@spring.message "label.language" />
+                    </label>
+                    <select name="lang" id="lang-select">
+                        <option value="">Default</option>
+                        <option value="en_EN">English</option>
+                        <option value="ru_RU">Руский</option>
+                    </select>
+                    <button type="submit">
+                        <@spring.message "button.language-change.text"/>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
@@ -81,8 +95,8 @@
                 <div class="card" style="width: 18rem;">
                     <img src="${item.image}" class="card-img-top" alt="${item.name}">
                     <div class="card-body">
-                        <h5 class="card-title">${item.name}</h5>
-                        <p class="card-text">${item.description}</p>
+                        <h5 class="card-title"><@spring.message "name"/> : ${item.name}</h5>
+                        <p class="card-text"><@spring.message "description"/> : ${item.description}</p>
                     </div>
                     <div class="card-footer">
                         <form action="/user/basket/item" method="post">
@@ -98,7 +112,7 @@
                             <input type="hidden" name="itemId" value="${item.id}">
                             <button class="comments btn btn-primary" type="button">
                             <span id="${item.id}" type="button" data-bs-toggle="modal" data-bs-target="#comments">
-                                Reviews
+                                <@spring.message "review"/>
                             </span>
                             </button>
                         </form>
@@ -136,5 +150,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="scripts/script.js"></script>
+
 </body>
 </html>

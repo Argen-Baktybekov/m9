@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <meta name="_csrf_token" content="${_csrf.token}"/>
+
+    <#import "/spring.ftl" as spring>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>MyBasket</title>
+    <title> <title><@spring.message code="myBasket"/></title></title>
 </head>
 <body>
 
@@ -42,6 +44,19 @@
                         </button>
                     </form>
                 </#if>
+                <form action="" method="get">
+                    <label for="lang-select">
+                        <@spring.message "label.language" />
+                    </label>
+                    <select name="lang" id="lang-select">
+                        <option value="en_EN">Default</option>
+                        <option value="en_EN">English</option>
+                        <option value="ru_RU">Руский</option>
+                    </select>
+                    <button type="submit">
+                        <@spring.message "button.language-change.text"/>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
@@ -66,7 +81,7 @@
                                        value="${(_csrf.token)!'csrf-token'}"/>
                             </#if>
                             <input type="hidden" name="itemId" value="${itemWA.item.id}">
-                            <button class="btn btn-primary" type="submit">ADD</button>
+                            <button class="btn btn-primary" type="submit">  <@spring.message "add"/></button>
                         </form>
                         <form action="/user/basket/delete/item" method="post">
                             <#if _csrf??>
@@ -75,7 +90,7 @@
                                        value="${(_csrf.token)!'csrf-token'}"/>
                             </#if>
                             <input type="hidden" name="itemId" value="${itemWA.item.id}">
-                            <button class="btn btn-primary" type="submit">DELETE</button>
+                            <button class="btn btn-primary" type="submit">  <@spring.message "delete"/></button>
                         </form>
                         <form action="/order" method="post">
                             <#if _csrf??>
@@ -84,7 +99,7 @@
                                        value="${(_csrf.token)!'csrf-token'}"/>
                             </#if>
                             <input type="hidden" name="itemId" value="${itemWA.item.id}">
-                            <button class="btn btn-primary" type="submit">Buy now</button>
+                            <button class="btn btn-primary" type="submit">  <@spring.message "buy"/></button>
                         </form>
                     </div>
                 </div>

@@ -10,14 +10,12 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>m9</title>
+    <title><@spring.message code="title"/></title>
 </head>
 <body>
-<#--<@spring.message code="title"/>-->
 <header class="header pb-2">
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
@@ -77,7 +75,7 @@
                         <@spring.message "label.language" />
                     </label>
                     <select name="lang" id="lang-select">
-                        <option value="">Default</option>
+                        <option value="en_EN">Default</option>
                         <option value="en_EN">English</option>
                         <option value="ru_RU">Руский</option>
                     </select>

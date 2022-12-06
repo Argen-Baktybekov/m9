@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <meta name="_csrf_token" content="${_csrf.token}"/>
-
+    <#import "/spring.ftl" as spring>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -26,7 +26,7 @@
                 <ul class="navbar-nav text-uppercase">
 
                     <li class="nav-item me-4">
-                        <a class="nav-link" href="/user/basket">My basket</a>
+                        <a class="nav-link" href="/user/basket"><@spring.message "myBasket"/></a>
                     </li>
                     <li class="nav-item me-4">
                         <h3>${user.firstName}</h3>
@@ -46,6 +46,19 @@
                         </button>
                     </form>
                 </#if>
+                <form action="" method="get">
+                    <label for="lang-select">
+                        <@spring.message "label.language" />
+                    </label>
+                    <select name="lang" id="lang-select">
+                        <option value="en_EN">Default</option>
+                        <option value="en_EN">English</option>
+                        <option value="ru_RU">Руский</option>
+                    </select>
+                    <button type="submit">
+                        <@spring.message "button.language-change.text"/>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
@@ -71,7 +84,7 @@
                                    value="${(_csrf.token)!'csrf-token'}"/>
                         </#if>
                         <input type="hidden" name="itemId" value="${itemWA.item.id}">
-                        <button class="btn btn-primary" type="submit">Buy now</button>
+                        <button class="btn btn-primary" type="submit">  <@spring.message "buy"/></button>
                     </form>
                 </div>
             </div>
@@ -83,11 +96,11 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Date</th>
-                <th scope="col">Item</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Price</th>
-                <th scope="col">Total</th>
-                <th scope="col">Review</th>
+                <th scope="col"><@spring.message "name"/></th>
+                <th scope="col"><@spring.message "amount"/></th>
+                <th scope="col"><@spring.message "price"/></th>
+                <th scope="col"><@spring.message "total"/></th>
+                <th scope="col"><@spring.message "review"/></th>
             </tr>
             </thead>
             <tbody>
